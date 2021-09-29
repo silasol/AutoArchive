@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
-ua = UserAgent()
+ua = UserAgent(use_cache_server=False)
 
 
 class Thread:
