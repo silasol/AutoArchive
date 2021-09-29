@@ -4,9 +4,6 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
-
-ua = UserAgent(use_cache_server=False)
 
 
 class Thread:
@@ -22,7 +19,8 @@ class Thread:
 def get_tread_list():
     FORUM_URL = os.getenv('FORUM_URL')
     headers = {
-        "User-Agent": ua.random}
+        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/93.0.4577.82 Mobile Safari/537.36"}
 
     r = requests.get(FORUM_URL, headers=headers);
 
@@ -61,7 +59,8 @@ def get_new_thread_list(thread_list):
 def post2cubox(thread):
     API_URL = os.getenv('CUBOX_API')
     headers = {
-        "User-Agent": ua.random,
+        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/93.0.4577.82 Mobile Safari/537.36",
         "Content-Type": "application/json; charset=utf-8"
     }
 
