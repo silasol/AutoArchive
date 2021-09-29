@@ -10,7 +10,8 @@ jobs:
       - name: "Show environment variables"
         env:
           CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
-          FORUM_URL: ${{env.FORUM_URL}}
+          FORUM_URL: ${{ runner.FORUM_URL }}
+
         run: |
           env
   build:
