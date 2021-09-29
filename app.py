@@ -17,7 +17,7 @@ class Thread:
 
 
 def get_tread_list():
-    FORUM_URL = os.getenv('FORUM_URL')
+    FORUM_URL = os.getenv("FORUM_URL")
     headers = {
         "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/93.0.4577.82 Mobile Safari/537.36"}
@@ -57,7 +57,7 @@ def get_new_thread_list(thread_list):
 
 
 def post2cubox(thread):
-    API_URL = os.getenv('CUBOX_API')
+    API_URL = os.getenv("CUBOX_API")
     headers = {
         "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/93.0.4577.82 Mobile Safari/537.36",
