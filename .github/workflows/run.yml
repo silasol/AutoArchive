@@ -2,15 +2,21 @@ name: Auto Archive
 on: push
 
 jobs:
+  show_environment:
+    name: "Show environment variables"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Show environment variables"
+        run: |
+          env
   build:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [ 3.9.6 ]
 
     steps:
-      - name: "Show env variables"
-          run: |
-            env
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
