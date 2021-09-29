@@ -1,9 +1,16 @@
-name: Greeting from Mona
+name: Auto Archive
 on: push
 
 jobs:
-  build:
+  show_environment:
+    name: "Show environment variables"
     runs-on: ubuntu-latest
+
+    steps:
+      - name: "Show environmetn variables"
+        run: |
+          env
+  build:
     strategy:
       matrix:
         python-version: [ 3.9.6 ]
