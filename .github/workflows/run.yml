@@ -3,7 +3,7 @@ on: push
 
 env:
   CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
-  FORUM_URL: ${{ secrets.FORUM_URL }}
+  FORUM_URL: ${{ FORUM_URL }}
 
 jobs:
   show_environment:
