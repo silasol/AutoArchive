@@ -2,8 +2,8 @@ name: Auto Archive
 on: push
 
 env:
-  CUBOX_API: $BUILD_CONFIGURATION
-  FORUM_URL: $FORUM_URL
+  CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
+  FORUM_URL: ${{ secrets.FORUM_URL }}
 
 jobs:
   show_environment:
