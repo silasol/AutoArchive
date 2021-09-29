@@ -1,9 +1,6 @@
 name: Auto Archive
 on: push
 
-env:
-  CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
-  FORUM_URL: ${{ env.FORUM_URL }}
 
 jobs:
   show_environment:
@@ -11,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Show environment variables"
+        env:
+          CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
+          FORUM_URL: ${{env.FORUM_URL}}
         run: |
           env
   build:
