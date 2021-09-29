@@ -15,16 +15,35 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ hashFiles('setup.py') }}-${{ hashFiles('dev-requirements.txt') }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: read preId
+        id: preId
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./last.txt
       - name: run script
         env:
           CUBOX_API: ${{ secrets.CUBOX_API }}
           FORUM_URL: ${{ secrets.FORUM_URL }}
         run: |
           python app.py
+      - name: read nowId
+        id: nowId
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./last.txt
+  commit:
+    if: ${{ steps.preId.outputs.content  == steps.nowId.outputs.content }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
       - name: Commit files
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
