@@ -5,10 +5,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-ubuntu-20.04
     strategy:
       matrix:
         python-version: [ 3.9.6 ]
+    outputs:
+      PRE_ID: ${{ steps.readPreId.outputs.content }}
+      NOW_ID: ${{ steps.readNowId.outputs.content }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -24,7 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: read preId
-        id: preId
+        id: readPreId
         uses: juliangruber/read-file-action@v1
         with:
           path: ./last.txt
@@ -35,13 +39,15 @@ jobs:
         run: |
           python app.py
       - name: read nowId
-        id: nowId
+        id: readNowId
         uses: juliangruber/read-file-action@v1
         with:
           path: ./last.txt
+
   commit:
-    if: ${{ steps.preId.outputs.content  == steps.nowId.outputs.content }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    needs: [ build ]
+    if: needs.build.outputs.PRE_ID != needs.build.outputs.NOW_ID
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF"
       - name: Commit files
