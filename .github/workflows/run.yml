@@ -1,24 +1,12 @@
 name: Auto Archive
 on: push
 
-
 jobs:
-  show_environment:
-    name: "Show environment variables"
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Show environment variables"
-        env:
-          CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
-          FORUM_URL: ${{ env.FORUM_URL }}
-        run: |
-          env
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [ 3.9.6 ]
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -31,7 +19,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: run script
         env:
-          CUBOX_API: ${{ secrets.ACCESS_TOKEN }}
-          FORUM_URL: ${{ env.FORUM_URL }}
+          CUBOX_API: ${{ secrets.CUBOX_API }}
+          FORUM_URL: ${{ secrets.FORUM_URL }}
         run: |
           python app.py
