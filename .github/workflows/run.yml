@@ -5,7 +5,9 @@ jobs:
   show_environment:
     name: "Show environment variables"
     runs-on: ubuntu-latest
-
+    env:
+      CUBOX_API: $BUILD_CONFIGURATION
+      FORUM_URL: $FORUM_URL
     steps:
       - name: "Show environment variables"
         run: |
