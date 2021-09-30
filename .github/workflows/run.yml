@@ -49,6 +49,7 @@ jobs:
     needs: [ build ]
     if: needs.build.outputs.PRE_ID != needs.build.outputs.NOW_ID
     steps:
+      - uses: actions/checkout@v2
       - run: echo "Deploying to production server on branch $GITHUB_REF"
       - name: Commit files
         run: |
